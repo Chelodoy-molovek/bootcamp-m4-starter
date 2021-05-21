@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
 import './SearchBox.css';
-
 class SearchBox extends Component {
-    state = {
-        searchLine: ''
-    }
-    searchLineChangeHandler = (e) => {
-        this.setState({ searchLine: e.target.value });
-    }
-    searchBoxSubmitHandler = (e) => {
-        e.preventDefault();
-    }
-    render() {
-        const { searchLine } = this.state;
 
+
+    render() {
+        const { ChangeHandler, SubmitHandler, searchLine} = this.props;
         return (
+
             <div className="search-box">
-                <form className="search-box__form" onSubmit={this.searchBoxSubmitHandler}>
+                <form className="search-box__form" onSubmit={(e) => SubmitHandler(e)}>
                     <label className="search-box__form-label">
                         Искать фильм по названию:
                         <input
                             value={searchLine}
                             type="text"
+                            name="value"
                             className="search-box__form-input"
                             placeholder="Например, Shawshank Redemption"
-                            onChange={this.searchLineChangeHandler}
+                            onChange={ChangeHandler}
                         />
                     </label>
                     <button
@@ -39,5 +32,5 @@ class SearchBox extends Component {
         );
     }
 }
- 
+
 export default SearchBox;
