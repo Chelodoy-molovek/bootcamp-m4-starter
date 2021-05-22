@@ -9,10 +9,12 @@ class ListPage extends Component {
     }
     componentDidMount() {
         const id = this.props.match.params;
+        console.log(this.props.match);
         console.log(id);
         // TODO: запрос к сервер на получение списка
         // TODO: запросы к серверу по всем imdbID
     }
+    
     render() { 
         return (
             <div className="list-page">

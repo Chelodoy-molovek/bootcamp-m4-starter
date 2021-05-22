@@ -4,15 +4,15 @@ import Header from '../../components/Header/Header';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Movies from '../../components/Movies/Movies';
 import Favorites from '../../components/Favorites/Favorites';
-import { loadList } from "../../components/Fetch/api";
+import { loadList,creatNewList } from "../../components/Fetch/api";
 
 class MainPage extends Component {
     state = {
         selectedListFilms: [],
         list: [],
-        searchLine: ''
+        searchLine: '',
+        title: "список"
     }
-
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
@@ -47,6 +47,15 @@ class MainPage extends Component {
         })
         this.setState({ selectedListFilms: newArr });
     }
+
+    slam = () => {
+        let arr = this.state.selectedListFilms.map((item) => item.imdbID)
+        
+        creatNewList(arr, this.state.title).then((data) =>{
+            console.log(data)
+        })
+    }
+ 
     render() {
         const { list, searchLine } = this.state;
         const { searchLineChangeHandler, searchBoxSubmitHandler } = this;
@@ -63,7 +72,7 @@ class MainPage extends Component {
                         </div>
                     </section>
                     <aside className="main-page__favorites">
-                        <Favorites selectedListFilms={this.state.selectedListFilms} deleteFilm={this.deleteFilm} />
+                        <Favorites selectedListFilms={this.state.selectedListFilms} deleteFilm={this.deleteFilm} addNewList={this.addNewList}slam={this.slam}/>
                     </aside>
                 </main>
             </div>
