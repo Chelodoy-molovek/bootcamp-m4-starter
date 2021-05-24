@@ -4,9 +4,8 @@ class SearchBox extends Component {
 
 
     render() {
-        const { ChangeHandler, SubmitHandler, searchLine} = this.props;
+        const { ChangeHandler, SubmitHandler, searchLine } = this.props;
         return (
-
             <div className="search-box">
                 <form className="search-box__form" onSubmit={(e) => SubmitHandler(e)}>
                     <label className="search-box__form-label">

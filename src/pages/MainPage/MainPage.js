@@ -4,14 +4,17 @@ import Header from '../../components/Header/Header';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Movies from '../../components/Movies/Movies';
 import Favorites from '../../components/Favorites/Favorites';
-import { loadList,creatNewList } from "../../components/Fetch/api";
+import { loadList, creatNewList } from "../../components/Fetch/api";
 
 class MainPage extends Component {
     state = {
         selectedListFilms: [],
         list: [],
         searchLine: '',
-        title: "список"
+        title: " ",
+        listValue: "",
+        turnButton: true,
+        serveId: ""
     }
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
@@ -48,14 +51,19 @@ class MainPage extends Component {
         this.setState({ selectedListFilms: newArr });
     }
 
+
     slam = () => {
         let arr = this.state.selectedListFilms.map((item) => item.imdbID)
-        
-        creatNewList(arr, this.state.title).then((data) =>{
-            console.log(data)
+        creatNewList(arr, this.state.listValue).then((data) => {
+            this.setState({ title: this.state.listValue, turnButton: false, serveId: data.id });
         })
     }
- 
+
+    listContent = (value) => {
+        this.setState({ listValue: value });
+    }
+
+
     render() {
         const { list, searchLine } = this.state;
         const { searchLineChangeHandler, searchBoxSubmitHandler } = this;
@@ -65,14 +73,27 @@ class MainPage extends Component {
                 <main className="main-page__content">
                     <section className="main-page__main-section">
                         <div className="main-page__search-box">
-                            <SearchBox list={list} searchLine={searchLine} ChangeHandler={searchLineChangeHandler} SubmitHandler={searchBoxSubmitHandler} />
+                            <SearchBox list={list}
+                                searchLine={searchLine}
+                                ChangeHandler={searchLineChangeHandler}
+                                SubmitHandler={searchBoxSubmitHandler} />
                         </div>
                         <div className="main-page__movies">
-                            <Movies listProps={list} addFilmList={this.addFilmList} />
+                            <Movies listProps={list}
+                                addFilmList={this.addFilmList}
+                                turnButton={this.state.turnButton} />
                         </div>
                     </section>
                     <aside className="main-page__favorites">
-                        <Favorites selectedListFilms={this.state.selectedListFilms} deleteFilm={this.deleteFilm} addNewList={this.addNewList}slam={this.slam}/>
+                        <Favorites selectedListFilms={this.state.selectedListFilms}
+                            deleteFilm={this.deleteFilm}
+                            addNewList={this.addNewList}
+                            slam={this.slam}
+                            listContent={this.listContent}
+                            title={this.state.title}
+                            turnButton={this.state.turnButton}
+                            sala={this.sala}
+                            serveId={this.state.serveId} />
                     </aside>
                 </main>
             </div>

@@ -9,7 +9,7 @@ class Movies extends Component {
             <ul className="movies">
                 {this.props.listProps.map((movie) => (
                     <li className="movies__item" key={movie.imdbID}>
-                        <MovieItem {...movie} addFilmList={this.props.addFilmList} />
+                        <MovieItem {...movie} addFilmList={this.props.addFilmList} turnButton={this.props.turnButton} />
                     </li>
                 ))}
             </ul>

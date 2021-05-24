@@ -10,7 +10,6 @@ export async function loadList(name) {
   }
 }
 
-
 export async function creatNewList(arr, title) {
   const info = {
     title: title,
@@ -26,7 +25,21 @@ export async function creatNewList(arr, title) {
   const data = await response.json();
   return data;
 }
-export function renderingList(id) {
-  let arr = id.map((item) => fetch(`http://www.omdbapi.com/?apikey=f0d0ad1a=${item}`).then(response => response.json()));
+
+export async function loadId(id) {
+  try {
+    const response = await fetch(
+      `https://acb-api.algoritmika.org/api/movies/list/${id}`
+    );
+    const body = await response.json();
+    return body;
+  } catch (err) {
+    alert('err');
+  }
+}
+
+export function renderingList(arrId) {
+  console.log(arrId)
+  let arr = arrId.map((item) => fetch(`http://www.omdbapi.com/?apikey=f0d0ad1a&i=${item}`).then(response => response.json()));
   return Promise.all(arr)
 }
