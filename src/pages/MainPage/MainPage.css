@@ -17,3 +17,12 @@
 .main-page__favorites {
     width: 35%;   
 }
+@media only screen and (max-width: 768px) {
+    .main-page__content{
+        flex-direction: column;
+    }
+    .main-page__favorites{
+        min-width: 300px;
+        padding-left:62px;
+    }
+}

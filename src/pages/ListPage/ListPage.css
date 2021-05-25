@@ -6,7 +6,22 @@
     font-size: 34px;
     margin-bottom: 26px;
 }
-
+.postList{
+        margin: 0 auto;
+}
 .list-page ul li {
     font-size: 18px;
+}
+@media only screen and (max-width: 768px) {
+    .list-page__title {
+    margin-left: 150px;
+    }
+    .poster{
+        margin-left: 100px;
+        width: 220px;
+        height: 300px;
+    }
+    .postListNames{
+        margin-left: 80px;
+    }
 }

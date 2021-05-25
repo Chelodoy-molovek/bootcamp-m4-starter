@@ -30,9 +30,9 @@ class ListPage extends Component {
                 <ul>
                     {movies.map((item) => {
                         return (
-                            <li key={item.imdbID}>
-                                <div><img src={item.Poster} /></div>
-                                <a href={`https://www.imdb.com/title/${item.imdbID}`} target="_blank">{item.Title} ({item.Year})</a>
+                            <li className="postList" key={item.imdbID}>
+                                <div><img className="poster" src={item.Poster} /></div>
+                                <a  className="postListNames"href={`https://www.imdb.com/title/${item.imdbID}`} target="_blank">{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}
